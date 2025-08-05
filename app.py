@@ -246,6 +246,38 @@ def save_dashboard_title():
     
     return jsonify({'success': True})
 
+@app.route('/get_theme', methods=['GET'])
+def get_theme():
+    """Gets the current theme setting."""
+    if not session.get('logged_in'):
+        return jsonify({'error': 'Not authorized'}), 401
+
+    config = get_config()
+    return jsonify({'theme': config.get('theme', 'bubblegum')})
+
+@app.route('/save_theme', methods=['POST'])
+def save_theme():
+    """Saves the selected theme."""
+    if not session.get('logged_in'):
+        return jsonify({'error': 'Not authorized'}), 401
+
+    theme = request.form.get('theme')
+    
+    if not theme:
+        return jsonify({'error': 'Theme is required'}), 400
+
+    # List of valid themes
+    valid_themes = ['bubblegum', 'terminal', 'ocean', 'forest', 'desert', 'sunset', 'cloud', 'midnight', 'pastel', 'vintage']
+    
+    if theme not in valid_themes:
+        return jsonify({'error': 'Invalid theme selected'}), 400
+
+    config = get_config()
+    config['theme'] = theme
+    save_config(config)
+    
+    return jsonify({'success': True})
+
 @app.route('/chat', methods=['POST'])
 def chat():
     """Handles chat requests using chosen API."""

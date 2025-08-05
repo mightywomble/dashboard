@@ -13,6 +13,171 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* Theme CSS Variables */
+        :root {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --bg-tertiary: #0f3460;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-hover: rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-border-hover: rgba(255, 255, 255, 0.25);
+            --text-primary: #e0e0e0;
+            --text-secondary: #9CA3AF;
+            --accent-primary: #8B5CF6;
+            --accent-secondary: #3B82F6;
+        }
+        
+        /* Bubble Gum Theme */
+        [data-theme="bubblegum"] {
+            --bg-primary: #ff6b9d;
+            --bg-secondary: #c44569;
+            --bg-tertiary: #f8b500;
+            --glass-bg: rgba(255, 255, 255, 0.2);
+            --glass-hover: rgba(255, 255, 255, 0.3);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --glass-border-hover: rgba(255, 255, 255, 0.6);
+            --text-primary: #ffffff;
+            --text-secondary: #f1f5f9;
+            --accent-primary: #ff9ff3;
+            --accent-secondary: #54a0ff;
+        }
+        
+        /* Terminal Theme */
+        [data-theme="terminal"] {
+            --bg-primary: #0c0c0c;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #262626;
+            --glass-bg: rgba(0, 255, 0, 0.1);
+            --glass-hover: rgba(0, 255, 0, 0.2);
+            --glass-border: rgba(0, 255, 0, 0.3);
+            --glass-border-hover: rgba(0, 255, 0, 0.5);
+            --text-primary: #00ff00;
+            --text-secondary: #00cc00;
+            --accent-primary: #00ff00;
+            --accent-secondary: #ffff00;
+        }
+        
+        /* Ocean Theme */
+        [data-theme="ocean"] {
+            --bg-primary: #1e3a8a;
+            --bg-secondary: #1e40af;
+            --bg-tertiary: #2563eb;
+            --glass-bg: rgba(59, 130, 246, 0.15);
+            --glass-hover: rgba(59, 130, 246, 0.25);
+            --glass-border: rgba(59, 130, 246, 0.3);
+            --glass-border-hover: rgba(59, 130, 246, 0.5);
+            --text-primary: #dbeafe;
+            --text-secondary: #93c5fd;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #06d6a0;
+        }
+        
+        /* Forest Theme */
+        [data-theme="forest"] {
+            --bg-primary: #064e3b;
+            --bg-secondary: #065f46;
+            --bg-tertiary: #047857;
+            --glass-bg: rgba(16, 185, 129, 0.15);
+            --glass-hover: rgba(16, 185, 129, 0.25);
+            --glass-border: rgba(16, 185, 129, 0.3);
+            --glass-border-hover: rgba(16, 185, 129, 0.5);
+            --text-primary: #d1fae5;
+            --text-secondary: #6ee7b7;
+            --accent-primary: #10b981;
+            --accent-secondary: #fbbf24;
+        }
+        
+        /* Desert Theme */
+        [data-theme="desert"] {
+            --bg-primary: #78350f;
+            --bg-secondary: #92400e;
+            --bg-tertiary: #b45309;
+            --glass-bg: rgba(245, 158, 11, 0.15);
+            --glass-hover: rgba(245, 158, 11, 0.25);
+            --glass-border: rgba(245, 158, 11, 0.3);
+            --glass-border-hover: rgba(245, 158, 11, 0.5);
+            --text-primary: #fef3c7;
+            --text-secondary: #fcd34d;
+            --accent-primary: #f59e0b;
+            --accent-secondary: #ef4444;
+        }
+        
+        /* Sunset Theme */
+        [data-theme="sunset"] {
+            --bg-primary: #7c2d12;
+            --bg-secondary: #ea580c;
+            --bg-tertiary: #fb923c;
+            --glass-bg: rgba(251, 146, 60, 0.15);
+            --glass-hover: rgba(251, 146, 60, 0.25);
+            --glass-border: rgba(251, 146, 60, 0.3);
+            --glass-border-hover: rgba(251, 146, 60, 0.5);
+            --text-primary: #fed7aa;
+            --text-secondary: #fdba74;
+            --accent-primary: #fb923c;
+            --accent-secondary: #ec4899;
+        }
+        
+        /* Cloud Theme */
+        [data-theme="cloud"] {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #e2e8f0;
+            --bg-tertiary: #cbd5e1;
+            --glass-bg: rgba(71, 85, 105, 0.1);
+            --glass-hover: rgba(71, 85, 105, 0.2);
+            --glass-border: rgba(71, 85, 105, 0.2);
+            --glass-border-hover: rgba(71, 85, 105, 0.4);
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #8b5cf6;
+        }
+        
+        /* Midnight Theme */
+        [data-theme="midnight"] {
+            --bg-primary: #0f0f23;
+            --bg-secondary: #1a1a3a;
+            --bg-tertiary: #2a2a4a;
+            --glass-bg: rgba(139, 92, 246, 0.1);
+            --glass-hover: rgba(139, 92, 246, 0.2);
+            --glass-border: rgba(139, 92, 246, 0.2);
+            --glass-border-hover: rgba(139, 92, 246, 0.4);
+            --text-primary: #e0e7ff;
+            --text-secondary: #a5b4fc;
+            --accent-primary: #8b5cf6;
+            --accent-secondary: #06d6a0;
+        }
+        
+        /* Pastel Theme */
+        [data-theme="pastel"] {
+            --bg-primary: #fdf2f8;
+            --bg-secondary: #fce7f3;
+            --bg-tertiary: #fbcfe8;
+            --glass-bg: rgba(236, 72, 153, 0.1);
+            --glass-hover: rgba(236, 72, 153, 0.2);
+            --glass-border: rgba(236, 72, 153, 0.2);
+            --glass-border-hover: rgba(236, 72, 153, 0.4);
+            --text-primary: #831843;
+            --text-secondary: #be185d;
+            --accent-primary: #ec4899;
+            --accent-secondary: #3b82f6;
+        }
+        
+        /* Vintage Theme */
+        [data-theme="vintage"] {
+            --bg-primary: #44403c;
+            --bg-secondary: #57534e;
+            --bg-tertiary: #6b7280;
+            --glass-bg: rgba(161, 98, 7, 0.15);
+            --glass-hover: rgba(161, 98, 7, 0.25);
+            --glass-border: rgba(161, 98, 7, 0.3);
+            --glass-border-hover: rgba(161, 98, 7, 0.5);
+            --text-primary: #fef3c7;
+            --text-secondary: #fcd34d;
+            --accent-primary: #a16207;
+            --accent-secondary: #dc2626;
+        }
+        
         /* Enhanced font loading with system fallbacks */
         * {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;

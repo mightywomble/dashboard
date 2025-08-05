@@ -53,6 +53,23 @@
             </div>
             <p class="text-xs text-gray-400 mt-1">This will be displayed at the top of your homepage</p>
         </div>
+        <!-- Theme Selection -->
+        <div class="mb-6">
+            <label for="theme_select" class="block mb-2 text-sm font-medium text-gray-300">Select Theme</label>
+            <select id="theme_select" class="glass-input text-sm rounded-lg w-full p-2.5">
+                <option value="bubblegum">Bubble Gum</option>
+                <option value="terminal">Terminal</option>
+                <option value="ocean">Ocean</option>
+                <option value="forest">Forest</option>
+                <option value="desert">Desert</option>
+                <option value="sunset">Sunset</option>
+                <option value="cloud">Cloud</option>
+                <option value="midnight">Midnight</option>
+                <option value="pastel">Pastel</option>
+                <option value="vintage">Vintage</option>
+            </select>
+            <button type="button" onclick="saveTheme()" class="mt-4 w-full text-white bg-green-600 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition">Save Theme</button>
+        </div>
     </div>
 </div>
 
@@ -579,10 +596,54 @@ function confirmDelete(type, name) {
     return confirm(`Are you sure you want to delete this ${type}: "${name}"?`);
 }
 
-// Load existing API keys and dashboard title when page loads
+function saveTheme() {
+    const themeSelect = document.getElementById('theme_select');
+    const selectedTheme = themeSelect.value;
+    
+    if (!selectedTheme) {
+        alert('Please select a theme!');
+        return;
+    }
+    
+    const formData = new FormData();
+    formData.append('theme', selectedTheme);
+    
+    fetch('/save_theme', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Theme saved successfully! Please refresh the page to see the changes.');
+        } else {
+            alert('Error: ' + (data.error || 'Failed to save theme'));
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error saving theme');
+    });
+}
+
+function loadSelectedTheme() {
+    fetch('/get_theme')
+    .then(response => response.json())
+    .then(data => {
+        if (data.theme) {
+            document.getElementById('theme_select').value = data.theme;
+        }
+    })
+    .catch(error => {
+        console.error('Error loading theme:', error);
+    });
+}
+
+// Load existing API keys, dashboard title, and selected theme when page loads
 document.addEventListener('DOMContentLoaded', function() {
     loadExistingApiKeys();
     loadDashboardTitle();
+    loadSelectedTheme();
     
     // Ensure modal form submission is handled
     const editLinkForm = document.getElementById('editLinkForm');
